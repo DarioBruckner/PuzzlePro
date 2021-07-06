@@ -1,0 +1,27 @@
+<mat-card class="example-card">
+    <mat-spinner *ngIf="isLoading"></mat-spinner>
+    <form [formGroup]="myForm" (ngSubmit)="login()">
+      <h3>Login</h3>
+      <mat-form-field apperearance="fill">
+        <mat-label>Enter your email</mat-label>
+        <input matInput type="email" placeholder="E-Mail" formControlName="usern" required>
+        <mat-error *ngIf="myForm.hasError('required', 'usern')">{{getEmailErrorMessage()}}</mat-error>
+        <mat-error *ngIf="myForm.hasError('email', 'usern')">{{getEmailErrorMessage()}}</mat-error>
+      </mat-form-field>
+      
+      <mat-form-field appearance="fill">
+        <mat-label>Enter your password</mat-label>
+        <input matInput [type]="hideone ? 'password' : 'text'" placeholder="New password" formControlName="password" required>
+        <button mat-icon-button type="button" matSuffix (click)="hideone = !hideone">
+          <mat-icon>{{ hideone ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+        <mat-error *ngIf="myForm.hasError('required', 'password')">Please enter your password</mat-error>
+      </mat-form-field>
+  
+      
+  
+      <button mat-raised-button color="primary" type="submit" >Login</button>
+      
+    </form>
+  
+  </mat-card>

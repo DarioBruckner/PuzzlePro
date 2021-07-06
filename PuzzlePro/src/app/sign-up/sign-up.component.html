@@ -1,0 +1,35 @@
+<mat-card class="example-card">
+    <mat-spinner *ngIf="isLoading"></mat-spinner>
+    <form [formGroup]="myForm" (ngSubmit)="signUp(myForm)" >
+      <h3>Signup</h3>
+      <mat-form-field>
+        <mat-label>Enter your username (email)</mat-label>
+        <input matInput type="email" placeholder="E-Mail" formControlName="usern" required>
+        <mat-error *ngIf="myForm.hasError('email', 'usern')">Please enter valid Email</mat-error>
+        <mat-error *ngIf="myForm.hasError('required', 'usern')">Please enter a Email</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Enter your password</mat-label>
+        <input matInput [type]="hideone ? 'password' : 'text'" minlength="8" placeholder="Password" formControlName="password" required>
+        <button mat-icon-button type="button" matSuffix (click)="hideone = !hideone">
+          <mat-icon>{{ hideone ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+        <mat-error *ngIf="myForm.hasError('required','password')">Please enter a password</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Repeat your password</mat-label>
+        <input matInput [type]="hidetwo ? 'password' : 'text'" minlength="8" placeholder="New password" formControlName="confirmPassword" required>
+        <button mat-icon-button type="button" matSuffix (click)="hidetwo = !hidetwo">
+          <mat-icon>{{ hidetwo ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+        <mat-error *ngIf="myForm.hasError('notSame')">
+          Passwords do not match
+        </mat-error>
+      </mat-form-field>
+      
+      <button mat-raised-button color="primary" type="submit">Signup</button>
+  
+    </form>
+  
+  </mat-card>
+  
