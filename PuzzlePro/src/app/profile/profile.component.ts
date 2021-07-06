@@ -11,5 +11,10 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(): void {
   }
+  loggedin = false;
+
+  Username = "test@test.at";
+
+  test = 1000;
 
 }
