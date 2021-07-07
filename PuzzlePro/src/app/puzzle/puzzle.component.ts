@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { DataService } from '../data.service';
 
 
 @Component({
@@ -13,9 +14,12 @@ export class PuzzleComponent implements OnInit {
   part_1: number = 0;
   part_2: number = 0;
   ps: boolean = false;
-  game: any;
+  time: number = 0;
+  interval:any;
+  score:number = -1;
+  highscore: boolean = false;
 
-  constructor() { }
+  constructor(private dataService: DataService) { }
 
   ngOnInit(): void {
     for (let i = 0; i < 9; i++) {
@@ -34,6 +38,11 @@ export class PuzzleComponent implements OnInit {
       this.puzzle[index] = temp;
     }
   };
+  startTimer() {
+    this.interval = setInterval(() => {
+      this.time += .01;
+    }, 10)
+  }
   checkPuzzle() {
     let counter: number = 0;
     for (let i = 0; i < 9; i++) {
@@ -48,6 +57,9 @@ export class PuzzleComponent implements OnInit {
     }
   };
   swapPieces(part: number) {
+    if(this.time == 0) {
+      this.startTimer();
+    }
     if (this.part_1 == 0) {
       this.part_1 = part;
     } else {
@@ -61,6 +73,13 @@ export class PuzzleComponent implements OnInit {
       this.part_2 = 0;
       if (this.checkPuzzle()) {
         this.ps = true;
+        clearInterval(this.interval);
+        if(this.dataService.loggedin) {
+          this.score = Math.round(100-this.time);
+          if(this.score > this.dataService.highscore) {
+            this.dataService.setHighscore(this.score);
+          }
+        }
         console.log(this.ps);
       }
       

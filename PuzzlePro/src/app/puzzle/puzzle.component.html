@@ -1,32 +1,12 @@
-<div class="container" fxLayoutAlign="center center">
-    <div class="board" fxLayout="row wrap">
-        
-        <app-puzzle-piece class="piece" *ngFor="let part of puzzle" fxFlex="0 0 calc(151px - 1px)" [pieceNumber]="part" [puzzleType]="puzzleType" [part_1]="part_1" [part_2]="part_2" (click)="swapPieces(part)" ></app-puzzle-piece>
-        
-
-
-    </div>
-
-
+<div fxLayoutAlign="center">
+    <h2>Time: {{time.toFixed(2)}}</h2>
 </div>
-<!--<div class="container" fxLayoutAlign="center center" cdkDropListGroup>
-    <div class="dropList" cdkDropList (cdkDropListDropped)="drop($event)" [cdkDropListData]="puzzle" > 
-        <div  cdkDrag  *ngFor="let part of puzzle">
-            <app-puzzle-piece  [pieceNumber]="part"  [puzzleType]="puzzleType"></app-puzzle-piece>
-            
-        </div>
-        
-    
+
+<div class="container" fxLayoutAlign="center center">
+    <div class="board" fxLayout="row wrap">        
+        <app-puzzle-piece class="piece" *ngFor="let part of puzzle" fxFlex="0 0 calc(151px - 1px)" [pieceNumber]="part" [puzzleType]="puzzleType" [part_1]="part_1" [part_2]="part_2" (click)="swapPieces(part)" ></app-puzzle-piece>
     </div>
-    </div>
-<div class="dropList" fxFlex="0 0 calc(33% - 1px)" cdkDropList (cdkDropListDropped)="drop($event)"></div>
-
-
-<div fxFlex="0 0 calc(33% - 1px)" cdkDropList (cdkDropListDropped)="drop($event)" *ngFor="let part of puzzle">
-            <app-puzzle-piece cdkDrag [pieceNumber]="part" [puzzleType]="puzzleType"></app-puzzle-piece>
-
-        </div>
-
-
-         
--->
+</div>
+<div *ngIf="score != -1" fxLayoutAlign="center">
+    <h2>Score: {{score}}</h2>
+</div>
