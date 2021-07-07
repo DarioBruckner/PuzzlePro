@@ -78,7 +78,8 @@ export class LogInComponent implements OnInit {
         next: (repsonseData) => {
           console.log(repsonseData['message']);
           this.token = repsonseData['auttoken'];
-          localStorage.setItem("token", this.token);
+          this.Data.token = this.token;
+          this.Data.username = this.myForm.controls["usern"].value;
           this.setLoggedin(true);
           this.router.navigate(['/']);
         },

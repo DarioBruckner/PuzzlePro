@@ -1,6 +1,7 @@
 import { ThrowStmt } from '@angular/compiler';
 import { Component } from '@angular/core';
 import { DataService } from './data.service';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
@@ -12,9 +13,12 @@ export class AppComponent {
 
   logged = false;
 
-  constructor(private data:DataService){
+  constructor(private data:DataService, private http: HttpClient){
     
   }
+  httpOptions = {
+    headers: new HttpHeaders({'content-type': 'application/json'})
+  };
 
   getLoggedin():boolean{
     this.logged = this.data.loggedin;
@@ -22,6 +26,22 @@ export class AppComponent {
   }
   
   logout():void{
-    this.data.loggedin = false;
+    
+    var payload = {'token': this.data.token};
+    this.http.post<{message:string}>("http://localhost:3000/logout", payload, this.httpOptions)
+      .subscribe({
+        next:(responseData) =>{
+          console.log(responseData["message"]);
+         
+          this.data.loggedin = false;
+        },
+        error: (err) =>{
+          console.log(err.message);
+        },
+      });
+
+
   }
+
+  
 }
