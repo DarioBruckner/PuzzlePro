@@ -106,6 +106,10 @@ app.post("/logout", function(req,res,next){
 
 
 
+app.get("/highscores", function(req,res,next){
+    
+});
+
 
 
 module.exports = app;

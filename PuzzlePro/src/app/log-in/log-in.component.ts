@@ -23,11 +23,8 @@ export class LogInComponent implements OnInit {
   hidetwo = true;
   isLoading = false;
 
+  
   token = "";
-
-  username = 'test@test.at';
-  pw = 12345678;
-
   myForm: FormGroup;
   myStroage = localStorage;
 

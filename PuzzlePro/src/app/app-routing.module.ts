@@ -4,12 +4,14 @@ import { LogInComponent } from './log-in/log-in.component';
 import { ProfileComponent } from './profile/profile.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { FAQComponent } from './faq/faq.component';
+import { HighscoresComponent } from './highscores/highscores.component';
 
 const routes: Routes = [
   {path: "login", component:LogInComponent},
   {path: "signup", component:SignUpComponent},
   {path: "profile", component:ProfileComponent},
-  {path: "FAQ", component:FAQComponent}
+  {path: "FAQ", component:FAQComponent},
+  {path: "highscores", component:HighscoresComponent}
 ];
 
 @NgModule({
