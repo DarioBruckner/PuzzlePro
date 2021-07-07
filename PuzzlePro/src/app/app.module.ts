@@ -26,6 +26,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { PuzzleComponent } from './puzzle/puzzle.component';
 import { PuzzlePieceComponent } from './puzzle-piece/puzzle-piece.component';
 import { FAQComponent } from './faq/faq.component';
+import { ChoosePuzzleComponent } from './choose-puzzle/choose-puzzle.component';
 
 
 
@@ -38,6 +39,7 @@ import { FAQComponent } from './faq/faq.component';
     PuzzleComponent,
     PuzzlePieceComponent,
     FAQComponent,
+    ChoosePuzzleComponent,
     
   ],
   imports: [
