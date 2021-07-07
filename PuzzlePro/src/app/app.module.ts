@@ -22,6 +22,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 //import { FlexModule } from '@angular/flex-layout';
 import {MatListModule} from '@angular/material/list';
 import { ProfileComponent } from './profile/profile.component';
+import { FAQComponent } from './faq/faq.component';
 
 
 
@@ -31,6 +32,7 @@ import { ProfileComponent } from './profile/profile.component';
     SignUpComponent,
     LogInComponent,
     ProfileComponent,
+    FAQComponent,
     
   ],
   imports: [
