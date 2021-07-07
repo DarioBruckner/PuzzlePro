@@ -1,0 +1,9 @@
+.board{
+    width: 465px;
+}
+
+.piece {
+    max-height: 150px;
+    max-width: 150px;
+    
+}

@@ -19,9 +19,12 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatToolbarModule } from '@angular/material/toolbar';
-//import { FlexModule } from '@angular/flex-layout';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import {MatListModule} from '@angular/material/list';
+import {DragDropModule} from '@angular/cdk/drag-drop'
 import { ProfileComponent } from './profile/profile.component';
+import { PuzzleComponent } from './puzzle/puzzle.component';
+import { PuzzlePieceComponent } from './puzzle-piece/puzzle-piece.component';
 
 
 
@@ -31,6 +34,8 @@ import { ProfileComponent } from './profile/profile.component';
     SignUpComponent,
     LogInComponent,
     ProfileComponent,
+    PuzzleComponent,
+    PuzzlePieceComponent,
     
   ],
   imports: [
@@ -47,9 +52,10 @@ import { ProfileComponent } from './profile/profile.component';
     MatButtonModule,
     MatProgressSpinnerModule,
     MatToolbarModule,
-//    FlexModule,
+    FlexLayoutModule,
     MatListModule,
-    NgbModule
+    DragDropModule,
+    //NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]
