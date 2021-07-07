@@ -9,6 +9,8 @@ import {
   FormBuilder,
 } from '@angular/forms';
 
+import {Router} from '@angular/router';
+import { DataService } from '../data.service';
 
 @Component({
   selector: 'app-log-in',
@@ -31,7 +33,7 @@ export class LogInComponent implements OnInit {
 
 
 
-  constructor(private formBuilder: FormBuilder, private http: HttpClient) {
+  constructor(private formBuilder: FormBuilder, private http: HttpClient, private Data: DataService, private router:Router) {
   
     this.myForm = this.formBuilder.group(
       {
@@ -54,7 +56,9 @@ export class LogInComponent implements OnInit {
 
 
  
-
+  setLoggedin(state:boolean):void{
+    this.Data.loggedin = state;
+  }
 
   getEmailErrorMessage() {
     if (this.myForm.controls['usern'].hasError('required')) {
@@ -74,9 +78,10 @@ export class LogInComponent implements OnInit {
         next: (repsonseData) => {
           console.log(repsonseData['message']);
           this.token = repsonseData['auttoken'];
-          localStorage.setItem("token", this.token);
-          
-         
+          this.Data.token = this.token;
+          this.Data.username = this.myForm.controls["usern"].value;
+          this.setLoggedin(true);
+          this.router.navigate(['/']);
         },
         error: (err) =>{
           console.log(err.message);

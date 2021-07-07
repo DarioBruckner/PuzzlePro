@@ -25,6 +25,7 @@ import {DragDropModule} from '@angular/cdk/drag-drop'
 import { ProfileComponent } from './profile/profile.component';
 import { PuzzleComponent } from './puzzle/puzzle.component';
 import { PuzzlePieceComponent } from './puzzle-piece/puzzle-piece.component';
+import { FAQComponent } from './faq/faq.component';
 
 
 
@@ -36,6 +37,7 @@ import { PuzzlePieceComponent } from './puzzle-piece/puzzle-piece.component';
     ProfileComponent,
     PuzzleComponent,
     PuzzlePieceComponent,
+    FAQComponent,
     
   ],
   imports: [
