@@ -13,7 +13,6 @@ export interface Highscores {
 }
 
 const ELEMENT_DATA: Highscores[] = [
-  {position: 1, username: 'test@test.at', highscore: 100000},
 
 ];
 
@@ -27,14 +26,46 @@ export class HighscoresComponent implements OnInit {
   displayedColumns: string[] = ['position', 'username', 'highscore'];
   dataSource = ELEMENT_DATA;
 
-  
-  constructor() {
+  data = {};
+  constructor(private http: HttpClient) { }
 
-   }
+  httpOptions = {
+    headers: new HttpHeaders({'content-type': 'application/json'})
+  };
 
   ngOnInit(): void {
+    this.getData();
   }
   @ViewChild(MatTable) table!: MatTable<Highscores>;
+
+
+  getData(){
+
+    let len:number = this.dataSource.length;
+
+    for(var i = 0; i< len; i++){
+      this.dataSource.pop();
+    }
+
+    this.http.get<{message: any}>("http://localhost:3000/tophighscores" , this.httpOptions)
+      .subscribe({
+        next: (repsonseData) => {
+          this.data = repsonseData;
+
+          let temp = JSON.stringify(this.data);
+          let temp2 = JSON.parse(temp);
+          for(var element in repsonseData){
+            
+            let newHighscore = {position: temp2[element]["position"], username: temp2[element]["username"], highscore: temp2[element]["highscore"]};
+            this.dataSource.push(newHighscore);
+          }
+          this.table.renderRows();
+        },
+        error: (err) =>{
+          console.log(err.message);
+        },
+      });
+  }
 
   addData(){
     let newHighscore = {position: 2, username: "ttt", highscore:11000}

@@ -10,10 +10,17 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 
-var name = "hallo@test.at";
+
 var db = {"test@test.at":{"username": "test@test.at","password": "1234", "highscore":"12000"}};
-db["test2@test.at"] = {"username": "test2@test.at","password": "12345", "highscore":"13000"};
-db[name] = {"username": name,"password": "123457", "highscore":"14000"};
+db["hallo@test.at1"] = {"username": "hallo@test.at1","password": "123457", "highscore":"14000"};
+db["hallo@test.at2"] = {"username": "hallo@test.at2","password": "123457", "highscore":"16000"};
+db["hallo@test.at3"] = {"username": "hallo@test.at3","password": "123457", "highscore":"18000"};
+db["hallo@test.at4"] = {"username": "hallo@test.at4","password": "123457", "highscore":"20000"};
+db["hallo@test.at5"] = {"username": "hallo@test.at5","password": "123457", "highscore":"22000"};
+db["hallo@test.at6"] = {"username": "hallo@test.at6","password": "123457", "highscore":"24000"};
+db["hallo@test.at7"] = {"username": "hallo@test.at7","password": "123457", "highscore":"26000"};
+db["hallo@test.at8"] = {"username": "hallo@test.at8","password": "123457", "highscore":"28000"};
+db["hallo@test.at9"] = {"username": "hallo@test.at9","password": "123457", "highscore":"30000"};
 
 let currentUser;
 
@@ -46,8 +53,38 @@ app.post("/login", function(req, res){
             });
         }
     }
-    next();
+   
 });
+
+
+app.get("/tophighscores", function(req,res,next){
+    let tempdb = JSON.parse(JSON.stringify(db));
+    let retary = [];
+    let userarr = [];
+    let score = 0;
+    let tempobj = null;
+        
+
+
+    for(var i = 0; i < 10; i++){
+        score = 0;
+        for(var element in tempdb){
+            
+            if(tempdb[element]["highscore"] > score){
+                score = tempdb[element]["highscore"];
+                tempobj = element;
+            }
+        }
+
+        
+
+        retary.push({position: i+1, username: tempdb[tempobj]["username"], highscore: tempdb[tempobj]["highscore"]});
+        delete tempdb[tempobj];
+    }
+    
+    res.json(retary);
+});
+
 
 app.post("/highscore", function(req, res) {
     if(currentUser != undefined){
@@ -67,7 +104,7 @@ app.post("/highscore", function(req, res) {
             message: "You have to be logged in to set scores"
         });
     }
-    next();
+    
 });
 
 app.post("/signup", function(req, res){
@@ -120,14 +157,11 @@ app.post("/logout", function(req,res,next){
             message: "You have to be logged in first to logout"
         });
     }
-    next();
+   
 });
 
 
 
-app.get("/highscores", function(req,res,next){
-    
-});
 
 
 
