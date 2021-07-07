@@ -15,8 +15,8 @@ export class PuzzleComponent implements OnInit {
   part_2: number = 0;
   ps: boolean = false;
   time: number = 0;
-  interval:any;
-  score:number = -1;
+  interval: any;
+  score: number = -1;
   highscore: boolean = false;
 
   constructor(private dataService: DataService) { }
@@ -57,32 +57,34 @@ export class PuzzleComponent implements OnInit {
     }
   };
   swapPieces(part: number) {
-    if(this.time == 0) {
+    if (this.time == 0) {
       this.startTimer();
     }
-    if (this.part_1 == 0) {
-      this.part_1 = part;
-    } else {
-      this.part_2 = part;
-      let index_1: number = this.puzzle.findIndex(x => x == this.part_1);
-      let index_2: number = this.puzzle.findIndex(x => x == this.part_2);
-      let temp: any = this.puzzle[index_2];
-      this.puzzle[index_2] = this.puzzle[index_1];
-      this.puzzle[index_1] = temp;
-      this.part_1 = 0;
-      this.part_2 = 0;
-      if (this.checkPuzzle()) {
-        this.ps = true;
-        clearInterval(this.interval);
-        if(this.dataService.loggedin) {
-          this.score = Math.round(100-this.time);
-          if(this.score > this.dataService.highscore) {
-            this.dataService.setHighscore(this.score);
+    if (!this.ps) {
+      if (this.part_1 == 0) {
+        this.part_1 = part;
+      } else {
+        this.part_2 = part;
+        let index_1: number = this.puzzle.findIndex(x => x == this.part_1);
+        let index_2: number = this.puzzle.findIndex(x => x == this.part_2);
+        let temp: any = this.puzzle[index_2];
+        this.puzzle[index_2] = this.puzzle[index_1];
+        this.puzzle[index_1] = temp;
+        this.part_1 = 0;
+        this.part_2 = 0;
+        if (this.checkPuzzle()) {
+          this.ps = true;
+          clearInterval(this.interval);
+          if (this.dataService.loggedin) {
+            this.score = Math.round(100 - this.time);
+            if (this.score > this.dataService.highscore) {
+              this.dataService.setHighscore(this.score);
+            }
           }
+          console.log(this.ps);
         }
-        console.log(this.ps);
+
       }
-      
     }
   }
 }

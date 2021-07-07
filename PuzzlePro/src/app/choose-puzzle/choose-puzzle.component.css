@@ -2,8 +2,8 @@ img{
     max-width: 300px;
     max-height: 300px;
 }
-.space{
-    min-height: 5%;
+.container{
+    padding-top: 5%;
 }
 .board {
     padding-left: 10%;
