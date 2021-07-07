@@ -1,6 +1,7 @@
 import { ThrowStmt } from '@angular/compiler';
 import { Component } from '@angular/core';
 import { DataService } from './data.service';
+
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 @Component({
@@ -12,7 +13,7 @@ export class AppComponent {
   title = 'PuzzlePro';
 
   logged = false;
-
+  choise: number = 0;
   constructor(private data:DataService, private http: HttpClient){
     
   }

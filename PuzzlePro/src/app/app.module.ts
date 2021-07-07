@@ -21,10 +21,15 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTableModule } from '@angular/material/table';
 //import { FlexModule } from '@angular/flex-layout';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import {MatListModule} from '@angular/material/list';
+import {DragDropModule} from '@angular/cdk/drag-drop'
 import { ProfileComponent } from './profile/profile.component';
+import { PuzzleComponent } from './puzzle/puzzle.component';
+import { PuzzlePieceComponent } from './puzzle-piece/puzzle-piece.component';
 import { FAQComponent } from './faq/faq.component';
 import { HighscoresComponent } from './highscores/highscores.component';
+import { ChoosePuzzleComponent } from './choose-puzzle/choose-puzzle.component';
 
 
 
@@ -34,8 +39,11 @@ import { HighscoresComponent } from './highscores/highscores.component';
     SignUpComponent,
     LogInComponent,
     ProfileComponent,
+    PuzzleComponent,
+    PuzzlePieceComponent,
     FAQComponent,
     HighscoresComponent,
+    ChoosePuzzleComponent,
     
   ],
   imports: [
@@ -54,8 +62,10 @@ import { HighscoresComponent } from './highscores/highscores.component';
     MatToolbarModule,
     MatTableModule,
 //    FlexModule,
+    FlexLayoutModule,
     MatListModule,
-    NgbModule
+    DragDropModule,
+    //NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]

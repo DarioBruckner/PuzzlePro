@@ -49,7 +49,26 @@ app.post("/login", function(req, res){
     next();
 });
 
-
+app.post("/highscore", function(req, res) {
+    if(currentUser != undefined){
+        if(req.body.token == currentUser.token){
+            db[req.body.usern].highscore = req.body.highscore;
+            res.status(200).json({
+                messgage: "Successfully set new Highscore"
+            })
+        }else{
+          
+            res.status(400).json({
+                message: "Error wrong token"
+            });
+        }
+    }else{
+        res.status(401).json({
+            message: "You have to be logged in to set scores"
+        });
+    }
+    next();
+});
 
 app.post("/signup", function(req, res){
     if(req.body.usern == undefined || req.body.password == undefined){
