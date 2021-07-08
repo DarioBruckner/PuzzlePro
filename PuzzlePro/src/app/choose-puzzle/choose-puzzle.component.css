@@ -2,11 +2,8 @@ img{
     max-width: 300px;
     max-height: 300px;
 }
-.container{
-    padding-top: 5%;
-}
 .board {
     padding-left: 10%;
     padding-right: 10%;
-    padding-top: 5rem;
+    padding-top: 5%;
 }
