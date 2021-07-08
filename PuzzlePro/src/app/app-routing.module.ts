@@ -7,6 +7,8 @@ import { FAQComponent } from './faq/faq.component';
 import { ChoosePuzzleComponent } from './choose-puzzle/choose-puzzle.component';
 import { HighscoresComponent } from './highscores/highscores.component';
 
+//all the routs to the components 
+//the puzzle component is the "home"-component and thats why it is empty
 const routes: Routes = [
   {path: "login", component:LogInComponent},
   {path: "signup", component:SignUpComponent},

@@ -10,7 +10,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 
-
+//Database with dummy data
 var db = {"test@test.at":{"username": "test@test.at","password": "1234", "highscore":"12"}};
 db["dario@bruckner.com"] = {"username": "dario@bruckner.com","password": "123457", "highscore":"14"};
 db["puzzle@pro.at"] = {"username": "puzzle@pro.at","password": "123457", "highscore":"16"};
@@ -25,12 +25,8 @@ db["Ichbinschlecht@puzzles.com"] = {"username": "Ichbinschlecht@puzzles.com","pa
 
 let currentUser;
 
-app.get("/", function (req, res) {
-    res.send("get hello world");
-});
 
-
-
+//Login route that returns the token thats needed for future communitcation 
 app.post("/login", function (req, res) {
     if (req.body.usern == undefined || req.body.password == undefined) {
         res.status(400).json({
@@ -60,6 +56,7 @@ app.post("/login", function (req, res) {
 });
 
 
+//get the top 10 datasets based on the highscores 
 app.get("/tophighscores", function (req, res, next) {
     let tempdb = JSON.parse(JSON.stringify(db));
     let retary = [];
@@ -67,7 +64,7 @@ app.get("/tophighscores", function (req, res, next) {
     let tempobj = null;
 
 
-
+    //repeats 10 times and scannes the entire database and gets the correct data
     for (var i = 0; i < 10; i++) {
         score = 0;
         for (var element in tempdb) {
@@ -79,7 +76,7 @@ app.get("/tophighscores", function (req, res, next) {
         }
 
 
-
+        //adds dataset to the return array
         retary.push({ position: i + 1, username: tempdb[tempobj]["username"], highscore: tempdb[tempobj]["highscore"] });
         delete tempdb[tempobj];
     }
@@ -109,6 +106,7 @@ app.post("/highscore", function (req, res) {
 
 });
 
+//signs up a new user to the db 
 app.post("/signup", function (req, res) {
     if (req.body.usern == undefined || req.body.password == undefined) {
         res.status(400).json({
@@ -141,6 +139,8 @@ app.post("/signup", function (req, res) {
     }
 });
 
+
+//logs the user out and deletes the current user
 app.post("/logout", function (req, res, next) {
     if (currentUser != undefined) {
         if (req.body.token == currentUser.token) {
@@ -169,6 +169,9 @@ app.post("/logout", function (req, res, next) {
 
 module.exports = app;
 
+
+
+//checks if the password was the correct one
 function login(usern, password) {
     let user = db[usern];
     if (user != undefined && user.password == password) {

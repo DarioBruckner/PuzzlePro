@@ -31,7 +31,7 @@ export class LogInComponent implements OnInit {
 
 
   constructor(private formBuilder: FormBuilder, private http: HttpClient, private Data: DataService, private router:Router) {
-  
+    //the data from the form is binded to the ngForm
     this.myForm = this.formBuilder.group(
       {
         usern: ['', [Validators.required, Validators.email]],
@@ -52,11 +52,12 @@ export class LogInComponent implements OnInit {
   ngOnInit(): void {}
 
 
- 
+  //sets the service variable on the value that is given
   setLoggedin(state:boolean):void{
     this.Data.loggedin = state;
   }
 
+  //used for error messages in the form
   getEmailErrorMessage() {
     if (this.myForm.controls['usern'].hasError('required')) {
       return 'You must enter a value';
@@ -68,7 +69,8 @@ export class LogInComponent implements OnInit {
   }
 
  
-
+  //trys to login the user in the database and gets data back, such as the auttoken and the current highest score of the user as well
+  // as the username
   login() {
     this.http.post<{message: string, auttoken: string, highscore: number}>("http://localhost:3000/login", this.myForm.value, this.httpOptions)
       .subscribe({

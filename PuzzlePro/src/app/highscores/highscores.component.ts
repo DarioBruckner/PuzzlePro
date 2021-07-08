@@ -36,9 +36,10 @@ export class HighscoresComponent implements OnInit {
   ngOnInit(): void {
     this.getData();
   }
+  //the table
   @ViewChild(MatTable) table!: MatTable<Highscores>;
 
-
+  //gets data for the top 10 highscores and displays them in the mat-table
   getData(){
 
     let len:number = this.dataSource.length;

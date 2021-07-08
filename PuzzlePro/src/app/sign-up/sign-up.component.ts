@@ -48,12 +48,13 @@ export class SignUpComponent implements OnInit {
   hidetwo = true;
   isLoading = false;
   token = "";
+  
   constructor(private formBuilder: FormBuilder, private http: HttpClient, private data: DataService, private router:Router) {
     this.myForm = this.formBuilder.group(
       {
         usern: ['', [Validators.required, Validators.email]],
-        password: ['', [Validators.required, Validators.minLength(8)]],
-        confirmPassword: ['', [Validators.required, Validators.minLength(8)]],
+        password: ['', [Validators.required]],
+        confirmPassword: ['', [Validators.required]],
       },
       { validator: this.checkPasswords}
     );
@@ -65,7 +66,7 @@ export class SignUpComponent implements OnInit {
   ngOnInit(): void {
   }
 
-
+  //checks if the 2 passwords are the same
   checkPasswords(group: FormGroup) {
     let pass = group.controls.password.value;
     let confirmPass = group.controls.confirmPassword.value;
@@ -73,6 +74,7 @@ export class SignUpComponent implements OnInit {
     return pass === confirmPass ? null : { notSame: true };
   }
 
+  //sends signup request to the server
   signUp(group: FormGroup){
    
 

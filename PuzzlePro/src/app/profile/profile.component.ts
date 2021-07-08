@@ -13,9 +13,11 @@ export class ProfileComponent implements OnInit {
   ngOnInit(): void {
   }
 
-
+  //sets the username to the currentusers name
   Username = this.data.username;
 
+
+  //sets the highscore to the currentsusers highest score
   highscore = this.data.highscore;
 
 }
