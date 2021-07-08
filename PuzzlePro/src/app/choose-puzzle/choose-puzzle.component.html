@@ -5,6 +5,7 @@
 </div>
 <div class="board">
     <div *ngIf="choise != 0">
+        <button mat-button (click)="back()">Back</button>
         <app-puzzle [puzzleType]="choise"></app-puzzle>
     </div>
     

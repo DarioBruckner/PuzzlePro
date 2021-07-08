@@ -19,5 +19,8 @@ export class ChoosePuzzleComponent implements OnInit {
   puzzle_2() {
     this.choise = 2;
   }
+  back() {
+    this.choise = 0;
+  }
 
 }
