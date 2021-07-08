@@ -12,15 +12,16 @@ app.use(express.urlencoded({ extended: false }));
 
 
 var db = {"test@test.at":{"username": "test@test.at","password": "1234", "highscore":"12"}};
-db["hallo@test.at1"] = {"username": "hallo@test.at1","password": "123457", "highscore":"14"};
-db["hallo@test.at2"] = {"username": "hallo@test.at2","password": "123457", "highscore":"16"};
-db["hallo@test.at3"] = {"username": "hallo@test.at3","password": "123457", "highscore":"18"};
-db["hallo@test.at4"] = {"username": "hallo@test.at4","password": "123457", "highscore":"20"};
-db["hallo@test.at5"] = {"username": "hallo@test.at5","password": "123457", "highscore":"22"};
-db["hallo@test.at6"] = {"username": "hallo@test.at6","password": "123457", "highscore":"24"};
-db["hallo@test.at7"] = {"username": "hallo@test.at7","password": "123457", "highscore":"26"};
-db["hallo@test.at8"] = {"username": "hallo@test.at8","password": "123457", "highscore":"28"};
-db["hallo@test.at9"] = {"username": "hallo@test.at9","password": "123457", "highscore":"30"};
+db["dario@bruckner.com"] = {"username": "dario@bruckner.com","password": "123457", "highscore":"14"};
+db["puzzle@pro.at"] = {"username": "puzzle@pro.at","password": "123457", "highscore":"16"};
+db["iamgood@atpuzzles.com"] = {"username": "iamgood@atpuzzles.com","password": "123457", "highscore":"18"};
+db["vietze@stefan.at"] = {"username": "vietze@stefan.at","password": "123457", "highscore":"70"};
+db["dominik@f.com"] = {"username": "dominik@f.com","password": "123457", "highscore":"22"};
+db["webframeworks@isttoll.at"] = {"username": "webframeworks@isttoll.at","password": "123457", "highscore":"24"};
+db["werbraucht@APM.at"] = {"username": "werbraucht@APM.at","password": "123457", "highscore":"26"};
+db["Bitte@highscore.at"] = {"username": "Bitte@highscore.at","password": "123457", "highscore":"28"};
+db["Wer@binIch.at"] = {"username": "Wer@binIch.at","password": "123457", "highscore":"30"};
+db["Ichbinschlecht@puzzles.com"] = {"username": "Ichbinschlecht@puzzles.com","password": "123457", "highscore":"10"};
 
 let currentUser;
 
