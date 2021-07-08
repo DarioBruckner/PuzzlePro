@@ -44,7 +44,9 @@ app.post("/login", function(req, res){
            
 
             res.status(200).json({
-                message: "Login successful, welcome", auttoken: token 
+                message: "Login successful, welcome", 
+                auttoken: token ,
+                highscore: db[req.body.usern].highscore,
             });
             
         }else{

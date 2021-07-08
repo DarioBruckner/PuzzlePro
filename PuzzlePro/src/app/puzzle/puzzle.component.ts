@@ -78,6 +78,7 @@ export class PuzzleComponent implements OnInit {
           if (this.dataService.loggedin) {
             this.score = Math.round(100 - this.time);
             if (this.score > this.dataService.highscore) {
+              this.highscore = true;
               this.dataService.setHighscore(this.score);
             }
           }

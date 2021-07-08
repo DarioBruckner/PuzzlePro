@@ -8,5 +8,6 @@
     </div>
 </div>
 <div *ngIf="score != -1" fxLayoutAlign="center">
-    <h2>Score: {{score}}</h2>
+    <h2 *ngIf="highscore == true">New highscore: {{score}}</h2>
+    <h2 *ngIf="highscore == false">Score: {{score}}</h2>
 </div>

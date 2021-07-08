@@ -84,6 +84,7 @@ export class SignUpComponent implements OnInit {
           this.data.loggedin = true;
           this.data.username = group.controls.usern.value;
           this.data.token = repsonseData["auttoken"];
+          this.data.highscore = 0;
           this.router.navigate(['/']);
 
         },
