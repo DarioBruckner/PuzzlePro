@@ -1,20 +1,17 @@
-<mat-toolbar>
+<mat-toolbar color="primary">
   <span routerLink="/">PuzzlePro</span>
   <span class="example-spacer"></span>
-  <button *ngIf="choise != 0" mat-raised-button color="primary" (click)="choise = 0">Return</button>
+  
   <a mat-raised-button color="primary" type="button" routerLink="/highscores">Highscores</a>
-  <!--<button *ngIf="choise != 0" mat-raised-button color="primary" (click)="choise = 0">Return</button>-->
   <a mat-raised-button color="primary" type="button" routerLink="/FAQ">FAQ</a>
   <a *ngIf="getLoggedin() == false" mat-raised-button color="primary" type="button"  routerLink="/login">Login</a>
   <a *ngIf="getLoggedin() == false" mat-raised-button color="primary" type="button" routerLink="/signup">Signup</a>
   <a *ngIf="getLoggedin()" mat-raised-button color="primary" type="button" routerLink="/profile">Profile</a>  
   <a *ngIf="getLoggedin()" mat-raised-button color="primary" type="button" routerLink="/" (click)="logout()">Logout</a>
-  
 </mat-toolbar>
 
 <div class="container">
   <router-outlet></router-outlet>
 </div>  
 
-<!--<app-choose-puzzle (choiseEvent)="choise = $event"></app-choose-puzzle>-->
 
