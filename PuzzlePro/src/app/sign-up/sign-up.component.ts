@@ -10,6 +10,8 @@ import {
   FormBuilder,
 } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
+import { DataService } from '../data.service';
+import {Router} from '@angular/router';
 
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -46,7 +48,7 @@ export class SignUpComponent implements OnInit {
   hidetwo = true;
   isLoading = false;
   token = "";
-  constructor(private formBuilder: FormBuilder, private http: HttpClient) {
+  constructor(private formBuilder: FormBuilder, private http: HttpClient, private data: DataService, private router:Router) {
     this.myForm = this.formBuilder.group(
       {
         usern: ['', [Validators.required, Validators.email]],
@@ -74,12 +76,15 @@ export class SignUpComponent implements OnInit {
   signUp(group: FormGroup){
    
 
-    this.http.post<{message: string, token: string}>("http://localhost:3000/signup", group.value, this.httpOptions)
+    this.http.post<{message: string, auttoken: string}>("http://localhost:3000/signup", group.value, this.httpOptions)
       .subscribe({
         next: (repsonseData) => {
           console.log(repsonseData['message']);
-          console.log(repsonseData['token']);
-          localStorage.setItem("token", repsonseData["token"]);
+          console.log(repsonseData['auttoken']);
+          this.data.loggedin = true;
+          this.data.username = group.controls.usern.value;
+          this.data.token = repsonseData["auttoken"];
+          this.router.navigate(['/']);
 
         },
         error: (err) =>{

@@ -67,15 +67,5 @@ export class HighscoresComponent implements OnInit {
       });
   }
 
-  addData(){
-    let newHighscore = {position: 2, username: "ttt", highscore:11000}
-
-    this.dataSource.push(newHighscore);
-
-    console.log(this.dataSource);
-    
-    this.table.renderRows();
-  }
-  
 
 }

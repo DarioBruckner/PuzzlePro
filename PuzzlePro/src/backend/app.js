@@ -11,16 +11,16 @@ app.use(express.urlencoded({ extended: false }));
 
 
 
-var db = {"test@test.at":{"username": "test@test.at","password": "1234", "highscore":"12000"}};
-db["hallo@test.at1"] = {"username": "hallo@test.at1","password": "123457", "highscore":"14000"};
-db["hallo@test.at2"] = {"username": "hallo@test.at2","password": "123457", "highscore":"16000"};
-db["hallo@test.at3"] = {"username": "hallo@test.at3","password": "123457", "highscore":"18000"};
-db["hallo@test.at4"] = {"username": "hallo@test.at4","password": "123457", "highscore":"20000"};
-db["hallo@test.at5"] = {"username": "hallo@test.at5","password": "123457", "highscore":"22000"};
-db["hallo@test.at6"] = {"username": "hallo@test.at6","password": "123457", "highscore":"24000"};
-db["hallo@test.at7"] = {"username": "hallo@test.at7","password": "123457", "highscore":"26000"};
-db["hallo@test.at8"] = {"username": "hallo@test.at8","password": "123457", "highscore":"28000"};
-db["hallo@test.at9"] = {"username": "hallo@test.at9","password": "123457", "highscore":"30000"};
+var db = {"test@test.at":{"username": "test@test.at","password": "1234", "highscore":"12"}};
+db["hallo@test.at1"] = {"username": "hallo@test.at1","password": "123457", "highscore":"14"};
+db["hallo@test.at2"] = {"username": "hallo@test.at2","password": "123457", "highscore":"16"};
+db["hallo@test.at3"] = {"username": "hallo@test.at3","password": "123457", "highscore":"18"};
+db["hallo@test.at4"] = {"username": "hallo@test.at4","password": "123457", "highscore":"20"};
+db["hallo@test.at5"] = {"username": "hallo@test.at5","password": "123457", "highscore":"22"};
+db["hallo@test.at6"] = {"username": "hallo@test.at6","password": "123457", "highscore":"24"};
+db["hallo@test.at7"] = {"username": "hallo@test.at7","password": "123457", "highscore":"26"};
+db["hallo@test.at8"] = {"username": "hallo@test.at8","password": "123457", "highscore":"28"};
+db["hallo@test.at9"] = {"username": "hallo@test.at9","password": "123457", "highscore":"30"};
 
 let currentUser;
 
@@ -60,7 +60,6 @@ app.post("/login", function(req, res){
 app.get("/tophighscores", function(req,res,next){
     let tempdb = JSON.parse(JSON.stringify(db));
     let retary = [];
-    let userarr = [];
     let score = 0;
     let tempobj = null;
         
@@ -90,6 +89,7 @@ app.post("/highscore", function(req, res) {
     if(currentUser != undefined){
         if(req.body.token == currentUser.token){
             db[req.body.usern].highscore = req.body.highscore;
+            console.log(db[req.body.usern]);
             res.status(200).json({
                 messgage: "Successfully set new Highscore"
             })
