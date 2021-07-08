@@ -10,7 +10,6 @@ export class ChoosePuzzleComponent implements OnInit {
   
   choise: number = 0;
   constructor() { }
-
   ngOnInit(): void {
   }
   puzzle_1(){

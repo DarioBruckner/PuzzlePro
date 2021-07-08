@@ -73,12 +73,12 @@ export class LogInComponent implements OnInit {
     this.http.post<{message: string, auttoken: string, highscore: number}>("http://localhost:3000/login", this.myForm.value, this.httpOptions)
       .subscribe({
         next: (repsonseData) => {
-          console.log(repsonseData['message']);
+          
           this.token = repsonseData['auttoken'];
           this.Data.token = this.token;
           this.Data.username = this.myForm.controls["usern"].value;
           this.Data.highscore = repsonseData['highscore'];
-          console.log(this.Data.highscore);
+          
           this.setLoggedin(true);
           this.router.navigate(['/']);
         },

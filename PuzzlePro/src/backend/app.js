@@ -25,108 +25,107 @@ db["Ichbinschlecht@puzzles.com"] = {"username": "Ichbinschlecht@puzzles.com","pa
 
 let currentUser;
 
-app.get("/", function(req, res){
+app.get("/", function (req, res) {
     res.send("get hello world");
 });
 
 
 
-app.post("/login", function(req, res){
-    if(req.body.usern == undefined || req.body.password == undefined){
+app.post("/login", function (req, res) {
+    if (req.body.usern == undefined || req.body.password == undefined) {
         res.status(400).json({
             message: "You must send a username and password!"
         });
-        
-    }else{
+
+    } else {
         var token = login(req.body.usern, req.body.password);
 
-        if(token != null){
-            currentUser = {"username": req.body.usern, "token": token};
-           
+        if (token != null) {
+            currentUser = { "username": req.body.usern, "token": token };
+
 
             res.status(200).json({
-                message: "Login successful, welcome", 
-                auttoken: token ,
+                message: "Login successful, welcome",
+                auttoken: token,
                 highscore: db[req.body.usern].highscore,
             });
-            
-        }else{
+
+        } else {
             res.status(500).json({
                 message: "Username or password were not found"
             });
         }
     }
-   
+
 });
 
 
-app.get("/tophighscores", function(req,res,next){
+app.get("/tophighscores", function (req, res, next) {
     let tempdb = JSON.parse(JSON.stringify(db));
     let retary = [];
     let score = 0;
     let tempobj = null;
-        
 
 
-    for(var i = 0; i < 10; i++){
+
+    for (var i = 0; i < 10; i++) {
         score = 0;
-        for(var element in tempdb){
-            
-            if(tempdb[element]["highscore"] > score){
+        for (var element in tempdb) {
+
+            if (tempdb[element]["highscore"] > score) {
                 score = tempdb[element]["highscore"];
                 tempobj = element;
             }
         }
 
-        
 
-        retary.push({position: i+1, username: tempdb[tempobj]["username"], highscore: tempdb[tempobj]["highscore"]});
+
+        retary.push({ position: i + 1, username: tempdb[tempobj]["username"], highscore: tempdb[tempobj]["highscore"] });
         delete tempdb[tempobj];
     }
-    
+
     res.json(retary);
 });
 
-
-app.post("/highscore", function(req, res) {
-    if(currentUser != undefined){
-        if(req.body.token == currentUser.token){
+//saves new highscore in DB
+app.post("/highscore", function (req, res) {
+    if (currentUser != undefined) {
+        if (req.body.token == currentUser.token) {
             db[req.body.usern].highscore = req.body.highscore;
-            console.log(db[req.body.usern]);
             res.status(200).json({
                 messgage: "Successfully set new Highscore"
             })
-        }else{
-          
+        } else {
+
             res.status(400).json({
                 message: "Error wrong token"
             });
         }
-    }else{
+    } else {
         res.status(401).json({
             message: "You have to be logged in to set scores"
         });
     }
-    
+
 });
 
-app.post("/signup", function(req, res){
-    if(req.body.usern == undefined || req.body.password == undefined){
+app.post("/signup", function (req, res) {
+    if (req.body.usern == undefined || req.body.password == undefined) {
         res.status(400).json({
             message: "You must send a username and password!"
         });
-        
-    }else{
+
+    } else {
         let checkUser = db[req.body.usern];
-        if(checkUser == undefined){
-            db[req.body.usern] = {"username": req.body.usern, "password": req.body.password, "highscore": 0}
+        if (checkUser == undefined) {
+            db[req.body.usern] = { "username": req.body.usern, "password": req.body.password, "highscore": 0 }
             let token = login(req.body.usern, req.body.password);
-            if(token != null){
-                currentUser = {"username": req.body.usern, "token":token};
+            if (token != null) {
+                currentUser = { "username": req.body.usern, "token": token };
                 res.status(200).json({
-                    message: "Signup successful, welcome", auttoken: token 
+                    message: "Signup successful, welcome", auttoken: token
                 });
-            }else{
+            } else {
                 res.status(500).json({
                     message: "Somewent went wrong, ERROR"
                 });
@@ -134,7 +133,7 @@ app.post("/signup", function(req, res){
             }
 
 
-        }else{
+        } else {
             res.status(409).json({
                 message: "Accout does already exsist"
             });
@@ -142,25 +141,25 @@ app.post("/signup", function(req, res){
     }
 });
 
-app.post("/logout", function(req,res,next){
-    if(currentUser != undefined){
-        if(req.body.token == currentUser.token){
+app.post("/logout", function (req, res, next) {
+    if (currentUser != undefined) {
+        if (req.body.token == currentUser.token) {
             delete currentUser;
             res.status(200).json({
                 messgage: "You successfully logged out"
             })
-        }else{
-          
+        } else {
+
             res.status(400).json({
                 message: "Error wrong token"
             });
         }
-    }else{
+    } else {
         res.status(401).json({
             message: "You have to be logged in first to logout"
         });
     }
-   
+
 });
 
 
@@ -170,11 +169,10 @@ app.post("/logout", function(req,res,next){
 
 module.exports = app;
 
-function login(usern, password){
+function login(usern, password) {
     let user = db[usern];
-    console.log(user + " " + usern + " " + password);
-    if(user != undefined && user.password == password){
-        let authtoken = Math.random().toString(16).substr(2,34);
+    if (user != undefined && user.password == password) {
+        let authtoken = Math.random().toString(16).substr(2, 34);
         return authtoken;
     }
     return null;

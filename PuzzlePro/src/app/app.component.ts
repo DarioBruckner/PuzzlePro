@@ -32,8 +32,7 @@ export class AppComponent {
     this.http.post<{message:string}>("http://localhost:3000/logout", payload, this.httpOptions)
       .subscribe({
         next:(responseData) =>{
-          console.log(responseData["message"]);
-         
+        
           this.data.loggedin = false;
         },
         error: (err) =>{

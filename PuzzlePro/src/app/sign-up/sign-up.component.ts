@@ -79,8 +79,7 @@ export class SignUpComponent implements OnInit {
     this.http.post<{message: string, auttoken: string}>("http://localhost:3000/signup", group.value, this.httpOptions)
       .subscribe({
         next: (repsonseData) => {
-          console.log(repsonseData['message']);
-          console.log(repsonseData['auttoken']);
+          
           this.data.loggedin = true;
           this.data.username = group.controls.usern.value;
           this.data.token = repsonseData["auttoken"];
